@@ -1,7 +1,7 @@
 //import { collection, getDocs, query, where, addDoc, doc, setDoc } from "firebase/firestore"
 import { collection, getDoc, getDocs, query, where, doc, setDoc } from "firebase/firestore"
 import { db as fsdb } from '../fb';
-import { sendEmail } from '../computations/sendEmail'
+// import { sendEmail } from '../computations/sendEmail'
 
 export default async function generateNewPlan(){
 
@@ -77,7 +77,7 @@ export async function startGeneration(startingDates, planLengths){
     saveAndStoreGroceryList(finalGroceryList);
 
     //send an email to the customer with their meal plan, grocery list, and recipies
-    sendEmail();
+    // sendEmail();
 
     console.log('outside of if statement')
     //make the length of the arrays

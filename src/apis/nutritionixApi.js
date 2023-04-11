@@ -2,7 +2,6 @@ let appID = 'a9dde67e'
 let apiKey = 'a85317f6041e49488efef8ce2178a6bd'
 
 export default function nutritionixApi(){
-    console.log('nutritionixApi can be called from here')
 }
 
 // function nutritionixAuth(){
@@ -39,7 +38,4 @@ export async function nlpApiPost(nlpString){
 }
 
 // async function nutritionJsonParse(result){
-//     console.log('parse: ', result);
-
-//     console.log('foods: ', await result.foods)
 // }
