@@ -26,20 +26,23 @@
     <!-- set up the display of the navigation bar -->
     <v-navigation-drawer v-model="drawer" absolute temporary app>
       <!-- make the list of the option in the navagtion bar -->
-      <v-list v-if="admin" nav dense>
+      <v-list nav dense>
         <v-subheader>MAIN MENU</v-subheader>
         <v-list-item
-          v-for="(link, i) in navLinks "
+          v-for="(link, i) in navLinks"
           :key="i"
-          :to="link.route"
-          link
         >
           <v-list-item-content>
-            <v-list-item-title>{{ link.text }}</v-list-item-title>
+            <v-btn :href="link.route" v-if="link.text !== 'Logout'" class="navBtn">
+              {{ link.text }}
+            </v-btn>
+            <v-btn @click="logout" v-else class="navBtn">
+              {{ link.text }}
+            </v-btn>
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <v-list v-else nav dense>
+      <!-- <v-list v-else nav dense>
         <v-subheader>MAIN MENU</v-subheader>
         <v-list-item
           v-for="(link, i) in navLinksAdmin"
@@ -51,13 +54,14 @@
             <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
+      </v-list> -->
     </v-navigation-drawer>
   </nav>
 </template>
 
 <script>
 import { clearHistory } from "../store/storeUsersInfo";
+import router from "../router";
 
 var isAdmin = sessionStorage.getItem("isAdmin");
 
@@ -76,24 +80,24 @@ export default {
       { text: "Donate", icon: "mdi-flag", route: "/donate" },
       { text: "Logout", icon: "mdi-flag", route: "/login" },
     ],
-    navLinksAdmin: [
-      { text: "Dashboard", icon: "mdi-home", route: "/" },
-      { text: "Settings", icon: "mdi-clock", route: "/settings" },
-      { text: "Meal Plans", icon: "mdi-account", route: "/meal_plans" },
-      { text: "Recipes", icon: "mdi-account", route: "/recipes" },
-      { text: "Grocery List", icon: "mdi-flag", route: "/grocery_list" },
-      { text: "Analysis", icon: "mdi-flag", route: "/analysis" },
-      { text: "Blog", icon: "mdi-flag", route: "/blog" },
-      { text: "Support", icon: "mdi-flag", route: "/support" },
-      { text: "Donate", icon: "mdi-flag", route: "/donate" },
-      { text: "Admin", icon: "mdi-flag", route: "/admin" },
-      { text: "Logout", icon: "mdi-flag", route: "/login" },
-    ],
+    // navLinksAdmin: [
+    //   { text: "Dashboard", icon: "mdi-home", route: "/" },
+    //   { text: "Settings", icon: "mdi-clock", route: "/settings" },
+    //   { text: "Meal Plans", icon: "mdi-account", route: "/meal_plans" },
+    //   { text: "Recipes", icon: "mdi-account", route: "/recipes" },
+    //   { text: "Grocery List", icon: "mdi-flag", route: "/grocery_list" },
+    //   { text: "Analysis", icon: "mdi-flag", route: "/analysis" },
+    //   { text: "Blog", icon: "mdi-flag", route: "/blog" },
+    //   { text: "Support", icon: "mdi-flag", route: "/support" },
+    //   { text: "Donate", icon: "mdi-flag", route: "/donate" },
+    //   { text: "Admin", icon: "mdi-flag", route: "/admin" },
+    //   { text: "Logout", icon: "mdi-flag", route: "/login" },
+    // ],
     drawer: false,
     group: null,
   }),
   created() {
-    clearHistory();
+    // clearHistory();
     this.initialize();
     // let curAdmin = sessionStorage.getItem('isAdmin');
 
@@ -122,8 +126,19 @@ export default {
     initialize() {
       this.isAdmin = sessionStorage.getItem("isAdmin");
     },
+
+    logout() {
+      console.log("Logout!!")
+      clearHistory();
+      router.push('/login')
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+.navBtn {
+  padding: 22px !important;
+  box-shadow: 0px 0px 0px 0px;
+  background-color: #fff !important;
+}</style>

@@ -188,7 +188,6 @@ var target = sessionStorage.getItem('calorieTarget');
 var maintence = sessionStorage.getItem('maintenceTarget');
 
 // var today = new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000).toISOString().substr(0, 10);
-console.log('this is when this is printed');
 
 export default {
     data: () => ({
